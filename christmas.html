@@ -13,13 +13,7 @@
       <polygon points="50,5 61,39 98,39 68,59 79,91 50,72 21,91 32,59 2,39 39,39" />
     </svg>
 
-    <!-- 📌 50 个灯泡（完整树）-->
-    <!-- 我帮你自动生成好了 -->
-    <!-- 越往下 y 越大，radius 越大，形成树形曲线 -->
-    <!-- rotate 需要绕圈旋转 -->    
-    <!-- 你不用手动生成，一次复制就够了 -->
-
-    <!-- 生成 50 个灯泡 -->
+ 
     <script>
       let html = "";
       for (let i = 0; i < 50; i++) {
@@ -39,6 +33,54 @@
       });
     </script>
 
+   
   </div>
+   <canvas id="particles"></canvas>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const particles = [];
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speedY: Math.random() * 0.5 + 0.2,
+    opacity: Math.random() * 0.8 + 0.2
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.y += p.speedY;
+
+    if (p.y > canvas.height) {
+      p.y = -10;
+      p.x = Math.random() * canvas.width;
+    }
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
 </body>
 </html>

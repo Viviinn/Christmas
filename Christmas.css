@@ -21,6 +21,7 @@ body {
           animation: spin 2s infinite linear;
 }
 .tree__light {
+  filter: drop-shadow(0 0 2vmin #bcfdff);
   transform-style: preserve-3d;
   position: absolute;
   height: 1.1vmin;
@@ -48,6 +49,17 @@ body {
   -webkit-animation: stroke 1s calc((var(--delay) * 0.95) * 0.05s) both;
           animation: stroke 1s calc((var(--delay) * 0.95) * 0.05s) both;
 }
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;              /* 在背景层 */
+  pointer-events: none;     /* 不干扰点击 */
+}
+
 @-webkit-keyframes stroke {
   from {
     stroke-dashoffset: -1000;
