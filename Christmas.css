@@ -19,6 +19,7 @@ body {
   transform-style: preserve-3d;
   -webkit-animation: spin 2s infinite linear;
           animation: spin 2s infinite linear;
+  overflow: visible;
 }
 .tree__light {
   filter: drop-shadow(0 0 2vmin #bcfdff);
@@ -40,9 +41,9 @@ body {
   height: 5vmin;
   width: 5vmin;
   overflow: visible !important;
-  bottom: 9%;
+  bottom: 8%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0) ;
   position: absolute;
   stroke-dasharray: 1000 1000;
   fill: none;
