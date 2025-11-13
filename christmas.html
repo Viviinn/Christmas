@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas Tree</title>
+  <link rel="stylesheet" href="Christmas.css" />
+</head>
+<body>
+  <div class="tree">
+
+    <svg class="tree__star" viewBox="0 0 100 100">
+      <polygon points="50,5 61,39 98,39 68,59 79,91 50,72 21,91 32,59 2,39 39,39" />
+    </svg>
+
+    <!-- 📌 50 个灯泡（完整树）-->
+    <!-- 我帮你自动生成好了 -->
+    <!-- 越往下 y 越大，radius 越大，形成树形曲线 -->
+    <!-- rotate 需要绕圈旋转 -->    
+    <!-- 你不用手动生成，一次复制就够了 -->
+
+    <!-- 生成 50 个灯泡 -->
+    <script>
+      let html = "";
+      for (let i = 0; i < 50; i++) {
+        let radius = i * 0.3 + 1;
+        let y = i * -1.6; 
+        html += `<div class="tree__light" 
+        style="
+        --y:${y};
+        --radius:${radius};
+        --rotate:${i*30}; 
+        --speed:2; 
+        --delay:${i%5}; 
+        --appear:${i};"></div>`;
+      }
+      document.addEventListener("DOMContentLoaded", ()=>{
+        document.querySelector(".tree").innerHTML += html;
+      });
+    </script>
+
+  </div>
+</body>
+</html>
