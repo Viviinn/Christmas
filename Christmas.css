@@ -17,9 +17,9 @@ body {
   width: 25vmin;
   transform: translateY(-50vmin);
   transform-style: preserve-3d;
-  -webkit-animation: spin 2s infinite linear;
-          animation: spin 2s infinite linear;
-  overflow: visible;
+  animation: spin 2s infinite linear;
+   will-change: transform;
+  backface-visibility: hidden;
 }
 .tree__light {
   filter: drop-shadow(0 0 2vmin #bcfdff);
