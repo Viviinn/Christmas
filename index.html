@@ -7,80 +7,41 @@
   <link rel="stylesheet" href="Christmas.css" />
 </head>
 <body>
-  <div class="tree">
+  <div class="tree-wrapper">
+    <div class="tree">
 
-    <svg class="tree__star" viewBox="0 0 100 100">
-      <polygon points="50,-20 61,35 95,35 68,55 78,90 50,70 22,90 32,55 5,35 39,35" />
-    </svg>
+      <svg class="tree__star" viewBox="0 0 100 100">
+        <polygon points="50,3 61,35 95,35 68,55 78,90 50,70 22,90 32,55 5,35 39,35" />
+      </svg>
 
- 
-    <script>
+    </div>
+  </div>
+
+  <canvas id="particles"></canvas>
+
+  <!-- 灯泡生成 JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       let html = "";
       for (let i = 0; i < 50; i++) {
         let radius = i * 0.3 + 1;
-        let y = i * -1.6; 
-        html += `<div class="tree__light" 
-        style="
-        --y:${y};
-        --radius:${radius};
-        --rotate:${i*30}; 
-        --speed:2; 
-        --delay:${i%5}; 
-        --appear:${i};"></div>`;
+        let y = i * -1.6;
+        html += `
+          <div class="tree__light"
+            style="
+              --y:${y};
+              --radius:${radius};
+              --rotate:${i * 30};
+              --speed:2;
+              --delay:${i % 5};
+              --appear:${i};
+            ">
+          </div>`;
       }
-      document.addEventListener("DOMContentLoaded", ()=>{
-        document.querySelector(".tree").innerHTML += html;
-      });
-    </script>
 
-   
-  </div>
-   <canvas id="particles"></canvas>
-
-<script>
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
-
-const particles = [];
-for (let i = 0; i < 120; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    size: Math.random() * 2 + 1,
-    speedY: Math.random() * 0.5 + 0.2,
-    opacity: Math.random() * 0.8 + 0.2
-  });
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
-
-    p.y += p.speedY;
-
-    if (p.y > canvas.height) {
-      p.y = -10;
-      p.x = Math.random() * canvas.width;
-    }
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-</script>
-
+      document.querySelector(".tree")
+        .insertAdjacentHTML("beforeend", html);
+    });
+  </script>
 </body>
 </html>

@@ -18,7 +18,85 @@ body {
   transform: translateY(-50vmin);
   transform-style: preserve-3d;
   animation: spin 2s infinite linear;
-   will-change: transform;
+   will-change: transform;body {
+  background: #000000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1300px;
+}
+
+/* wrapper 负责定位 */
+.tree-wrapper {
+  transform: translateY(-30vmin);
+  perspective: 1300px;
+}
+
+/* tree 专门负责 3D 旋转 */
+.tree {
+  position: relative;
+  height: 50vmin;
+  width: 25vmin;
+  transform-style: preserve-3d;
+  animation: spin 2s linear infinite;
+
+  /* 手机 GPU 加速 */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* star */
+.tree__star {
+  stroke-width: 5vmin;
+  stroke: #f5e0a3;
+  filter: drop-shadow(0 0 2vmin #fcf1cf);
+  height: 5vmin;
+  width: 5vmin;
+  bottom: 8%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: absolute;
+  stroke-dasharray: 1000 1000;
+  fill: none;
+}
+
+/* light */
+.tree__light {
+  position: absolute;
+  height: 1.1vmin;
+  width: 1.1vmin;
+  border-radius: 50%;
+  left: 50%;
+  bottom: calc(var(--y) * 1%);
+  transform: translate(-50%, 50%)
+            rotateY(calc(var(--rotate) * 1deg))
+            translate3d(0, 0, calc(var(--radius) * 1vmin));
+  animation: flash calc(var(--speed) * 1s) 
+             calc(var(--delay) * 1s) infinite steps(4),
+             appear 0.5s calc(var(--appear) * 0.05s) both;
+}
+
+/* spin animation — 真正的 3D 动画 */
+@keyframes spin {
+  to {
+    transform: rotateY(360deg); /* ⭐ 关键！不要混 translate */
+  }
+}
+
+/* appear */
+@keyframes appear {
+  from { opacity: 0; }
+}
+
+/* flash */
+@keyframes flash {
+  0%, 100% { background: #4f60f6; }
+  20% { background: #f64f4f; }
+  40% { background: #4fecf6; }
+  60% { background: #f6db4f; }
+  80% { background: #f64fe5; }
+}
   backface-visibility: hidden;
 }
 .tree__light {
